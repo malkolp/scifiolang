@@ -12,6 +12,11 @@ public class ToolManager {
 
     public TokenTableManager tokenTableManager(){return TokenTableManager.get();}
 
+    public void init(){
+        Register.resetTokenList();
+
+    }
+
     public void end(){
         Lexer.end();
         Preprocessor.end();

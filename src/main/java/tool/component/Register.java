@@ -25,7 +25,13 @@ class Register{
                 tokenList.add(TokenTableManager.token(key));
             } else {
                 if (Regex.numConstant(key)){
-                    registerConstant(key);
+                    if (Regex.doubletype(key)){
+                        registerConstant(key,ValueHandler.DOUBLE_TYPE);
+                    } else if (Regex.floattype(key)){
+                        registerConstant(key,ValueHandler.FLOAT_TYPE);
+                    } else {
+                        registerConstant(key,ValueHandler.INT_TYPE);
+                    }
                 } else if (Regex.identifier(key)) {
                     registerIdentifier(key);
                 } else {
@@ -34,7 +40,11 @@ class Register{
             }
         } else {
             if (Regex.numConstant(key)){
-                registerConstant(key);
+                if (Regex.doubletype(key)){
+                    registerConstant(key,ValueHandler.DOUBLE_TYPE);
+                } else {
+                    registerConstant(key,ValueHandler.FLOAT_TYPE);
+                }
             } else {
                 registerSymbol(key);
             }
@@ -66,17 +76,26 @@ class Register{
 
     static void registerString(String key){
         //String MANAGER
+        double[] value = ValueHandler.get().registerValue(key,ValueHandler.STRING_TYPE);
         tokenList.add(TokenTableManager.token(TokenTableManager.CONSTANT));
+        tokenList.add(value[0]);
+        tokenList.add(value[1]);
     }
 
-    private static void registerConstant(String key){
-        //value MANAGER
+    private static void registerConstant(String key,double type){
+        double[] value = ValueHandler.get().registerValue(key,type);
         tokenList.add(TokenTableManager.token(TokenTableManager.CONSTANT));
+        tokenList.add(value[0]);
+        tokenList.add(value[1]);
     }
 
     private static void registerIdentifier(String key){
-        //identifier MANAGER
+        double[] value = IdentifierHandler.get().registerID(key);
         tokenList.add(TokenTableManager.token(TokenTableManager.IDENTIFIER));
+        tokenList.add(value[0]);
+        tokenList.add(value[1]);
+        tokenList.add(value[2]);
+        tokenList.add(value[3]);
     }
 
     private static void registerError(String key){

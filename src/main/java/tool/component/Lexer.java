@@ -7,7 +7,7 @@ public class Lexer{
     private static Lexer instance;
     private static ArrayList<Double> token;
 
-    private Lexer(){Register.resetTokenList();}
+    private Lexer(){}
 
     private static void init(){
         if (instance == null) instance = new Lexer();

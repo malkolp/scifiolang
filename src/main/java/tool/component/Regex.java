@@ -82,4 +82,16 @@ class Regex {
         Matcher m = p.matcher(key);
         return m.find();
     }
+
+    static boolean doubletype(String value){
+        Pattern p = Pattern.compile("^[\\d]+[.][\\d]+[d]?$|^[\\d]+d$");
+        Matcher m = p.matcher(value);
+        return m.find();
+    }
+
+    static boolean floattype(String value){
+        Pattern p = Pattern.compile("^[\\d]+[.][\\d]+[f]$|^[\\d]+f$");
+        Matcher m = p.matcher(value);
+        return m.find();
+    }
 }
