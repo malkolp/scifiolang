@@ -2,34 +2,20 @@ package tool.component;
 
 import java.util.ArrayList;
 
-public class Register{
+class Register{
 
-    private static Register instance;
     private static ArrayList<Double> tokenList;
 
-    private Register(){tokenList = new ArrayList<>();}
-
-    private static void init(){
-        if (instance == null) instance = new Register();
-    }
-
-    static Register get(){
-        init();
-        return instance;
-    }
-
-    static void end(){
-        tokenList = null;
-        instance = null;
-    }
+    private Register(){}
 
     static ArrayList<Double> getToken(){
         ArrayList<Double> toReturn = (ArrayList<Double>) tokenList.clone();
-        clearTokenList();
+        resetTokenList();
         return toReturn;
     }
 
-    private static void clearTokenList(){
+    static void resetTokenList(){
+        if (tokenList == null) tokenList = new ArrayList<>();
         tokenList.clear();
     }
 
